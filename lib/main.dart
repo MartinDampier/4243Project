@@ -68,6 +68,28 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _handleTap(Offset tapPosition) {
+    if (tapPosition.dx >= 50 && tapPosition.dx <= 250 && tapPosition.dy >= 50 && tapPosition.dy <= 250) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Information'),
+            content: Text('This is some information about the first block.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -105,6 +127,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Text('Below is a map:'),GestureDetector(
+              onTapUp: (TapUpDetails details) {
+                _handleTap(details.localPosition);
+              },
+              child: CustomPaint(
+                size: Size(1000.0, 600.0),
+                painter: SimpleMapPainter(),
+              ),
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -121,5 +152,43 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+}
+
+class SimpleMapPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke; // set the draw mode
+
+    // draw easy three box 
+    final path = Path()
+      ..moveTo(50, 50)
+      ..lineTo(250, 50)
+      ..lineTo(250, 250)
+      ..lineTo(50, 250)
+      ..lineTo(50, 50)
+
+      ..moveTo(300, 50)
+      ..lineTo(500, 50)
+      ..lineTo(500, 250)
+      ..lineTo(300, 250)
+      ..lineTo(300, 50)
+
+      ..moveTo(50, 300)
+      ..lineTo(250, 300)
+      ..lineTo(250, 500)
+      ..lineTo(50, 500)
+      ..lineTo(50, 300);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
