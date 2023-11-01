@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const MyApp());
@@ -131,9 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
               onTapUp: (TapUpDetails details) {
                 _handleTap(details.localPosition);
               },
-              child: CustomPaint(
-                size: Size(1000.0, 600.0),
-                painter: SimpleMapPainter(),
+              child: SvgPicture.asset(
+                'assets/pftMap.svg',
+                width: 1000.0,
+                height: 600.0,
+                fit: BoxFit.contain,
               ),
             ),
             const Text(
@@ -156,39 +159,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 }
 
-class SimpleMapPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 2.0
-      ..style = PaintingStyle.stroke; // set the draw mode
 
-    // draw easy three box 
-    final path = Path()
-      ..moveTo(50, 50)
-      ..lineTo(250, 50)
-      ..lineTo(250, 250)
-      ..lineTo(50, 250)
-      ..lineTo(50, 50)
-
-      ..moveTo(300, 50)
-      ..lineTo(500, 50)
-      ..lineTo(500, 250)
-      ..lineTo(300, 250)
-      ..lineTo(300, 50)
-
-      ..moveTo(50, 300)
-      ..lineTo(250, 300)
-      ..lineTo(250, 500)
-      ..lineTo(50, 500)
-      ..lineTo(50, 300);
-
-    canvas.drawPath(path, paint);
-  }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
-}
