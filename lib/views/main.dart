@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/genericStyles.dart';
+import 'package:flutter_application_1/views/accountView.dart';
+import 'package:flutter_application_1/views/classesView.dart';
+import 'package:flutter_application_1/views/settingsView.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,31 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -96,6 +79,50 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children:
+            [
+              SizedBox(
+                height: 60,
+                child: DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: genericStyles.lsuPurple,
+                    ),
+                    child: Text('Drawer Header'),
+                  )
+              ),
+              ListTile(
+                title: const Text('Account'),
+                selected: false,
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const AccountPage(title: 'My Account');
+                  }));
+                },
+              ),
+              ListTile(
+                title: const Text('Classes'),
+                selected: false,
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const ClassesPage(title: 'My Classes');
+                  }));
+                },
+              ),
+              ListTile(
+                title: const Text('Settings'),
+                selected: false,
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const SettingsPage(title: 'Settings');
+                  }));
+                },
+              ),
+            ]
         ),
       ),
       floatingActionButton: FloatingActionButton(
