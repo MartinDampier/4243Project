@@ -129,41 +129,27 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             )),
-            SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 200,
-                child: TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _name = _nameController.text;
-                      _subject = _subjectController.text;
-                    });
-                  },
-                  child: const Text('Confirm'),
-                ),
-              ),
+            SizedBox(height: 20), // Provide some vertical spacing
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _name = _nameController.text;
+                  _subject = _subjectController.text;
+                });
+              },
+              child: const Text('Confirm'),
             ),
-            SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 200,
-                child: TextButton(
-                  onPressed: () {
-                    // Logic to clear the form
-                    setState(() {
-                      _nameController.clear();
-                      _subjectController.clear();
-                      _name = '';
-                      _subject = '';
-                      _gender = 'Not Specified'; // Reset the gender to default
-                    });
-                  },
-                  child: const Text('Reset'),
-                ),
-              ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _nameController.text = '';
+                  _subjectController.text = '';
+                  _name = '';
+                  _subject = '';
+                  _gender = 'Walmart Bag'; // Reset the gender to default
+                });
+              },
+              child: const Text('Modify'),
             ),
             SizedBox(height: 20),
             Align(
@@ -181,19 +167,14 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 200,
-                child: TextButton(
-                  onPressed: () {
-                    // Logic to go back to the previous screen
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Go Back'),
-                ),
-              ),
+            if (_name.isNotEmpty && _subject.isNotEmpty && _gender.isNotEmpty)
+              Text('Hello, $_name! Your subject is $_subject and your gender is $_gender.'),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Go Back'),
+
             ),
           ],
         ),
