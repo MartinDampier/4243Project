@@ -3,6 +3,8 @@ import 'package:flutter_application_1/styles/genericStyles.dart';
 import 'package:flutter_application_1/views/accountView.dart';
 import 'package:flutter_application_1/views/classesView.dart';
 import 'package:flutter_application_1/views/settingsView.dart';
+import 'package:flutter_application_1/views/mapView.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -119,6 +121,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const SettingsPage(title: 'Settings');
+                  }));
+                },
+              ),
+              ListTile(
+                title: const Text('Map'),
+                selected: false,
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const MapPage(title: 'Map');
                   }));
                 },
               ),
