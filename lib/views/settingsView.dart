@@ -199,40 +199,6 @@ class _SettingsPageState extends State<SettingsPage> {
             subtitle: Text(DateFormat('yMMMMd').format(_birthdate)), // Using the intl package to format the date
             onTap: _changeBirthdate,
           ),
-          ListTile(
-            title: const Text('Preferences'),
-            onTap: () {
-              // Implement navigation or functionality for preferences setting
-            },
-          ),
-          SwitchListTile(
-            title: const Text('Theme'),
-            value: true, // Assume the theme is currently set to true (dark mode)
-            onChanged: (bool value) {
-              // Implement theme change functionality
-            },
-          ),
-          ListTile(
-            title: const Text('Language'),
-            subtitle: const Text('English'),
-            onTap: () {
-              // Implement navigation or functionality for language setting
-            },
-          ),
-          SwitchListTile(
-            title: const Text('Data Sharing'),
-            value: false, // Assume data sharing is currently set to false
-            onChanged: (bool value) {
-              // Implement data sharing functionality
-            },
-          ),
-          SwitchListTile(
-            title: const Text('Allow Location'),
-            value: true, // Assume location is currently allowed
-            onChanged: (bool value) {
-              // Implement location permission functionality
-            },
-          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextButton(
