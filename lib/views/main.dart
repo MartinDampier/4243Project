@@ -1,9 +1,13 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/class.dart';
+import 'package:flutter_application_1/models/user.dart';
 import 'package:flutter_application_1/styles/genericStyles.dart';
 import 'package:flutter_application_1/views/accountView.dart';
 import 'package:flutter_application_1/views/classesView.dart';
 import 'package:flutter_application_1/views/settingsView.dart';
 import 'package:flutter_application_1/views/mapView.dart';
+import 'package:flutter_application_1/enums/genders.dart';
 import '../enums/navigationTypes.dart';
 import 'navigateView.dart';
 
@@ -44,16 +48,48 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  user myUser = user();
+
+  _MyHomePageState(){
+    myUser.Gender = genders.NonBinary;
+    myUser.UserName = "DemoUser";
+    myUser.Email = "DemoUser@Sage.com";
+    myUser.PhoneNumber = "1234567890";
+    myUser.BirthDate = DateTime(2000,1,1);
+    myUser.MainSubject = "CSC";
+    myUser.Classes.add(StudentClass(
+        "CSC3304",
+        "1225",
+        TimeOfDay(hour: 7, minute: 30),
+        TimeOfDay(hour: 8, minute: 20)
+    ));
+    myUser.Classes.add(StudentClass(
+        "CSC4330",
+        "1253",
+        TimeOfDay(hour: 8, minute: 30),
+        TimeOfDay(hour: 9, minute: 20)
+    ));
+    myUser.Classes.add(StudentClass(
+        "CSC4598",
+        "1300",
+        TimeOfDay(hour: 9, minute: 30),
+        TimeOfDay(hour: 10, minute: 30)
+    ));
+  }
+
   // [COMMANDS]
   void findNextClass() {
+      TimeOfDay now = TimeOfDay.now();
+      double nowComparable = now.hour + now.minute/60.0;
+      List<StudentClass> futureClasses = myUser.Classes.where((z) => z.comparableStartTime! < nowComparable).toList();
+      var nowClass = futureClasses.first;
     setState(() {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const NavigatePage(title: '', navType: NavigationTypes.NextClass,);
       }));
     });
   }
-  void openMapView()
-  {
+  void openMapView() {
     setState(() {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const MapPage(title: 'Map');
