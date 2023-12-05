@@ -1,14 +1,11 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:intl/intl.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
+import '../enums/navigationTypes.dart';
 
 class NavigatePage extends StatefulWidget {
-  const NavigatePage({Key? key, required this.title}) : super(key: key);
+  const NavigatePage({Key? key, required this.title, required this.navType }) : super(key: key);
   final String title;
-
+  final NavigationTypes navType;
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -26,6 +23,10 @@ class _SettingsPageState extends State<NavigatePage> {
   Icon rightButton = Icon(Icons.check);
   Widget rightButtonAction = FloatingActionButton(onPressed: () {  },);
   int cound = 0;
+  //final String assetName = 'assets/image_that_does_not_exist.svg';
+  //final Widget svg = SvgPicture.asset(
+  //  assetName,
+  //);
 
  Widget back = FloatingActionButton(onPressed: () {  },);
  Widget cancel = FloatingActionButton(onPressed: () {  },);
