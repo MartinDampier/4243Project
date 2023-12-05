@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key, required this.title}) : super(key: key);
@@ -12,9 +13,9 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   double _scale = 1.0;
   double _previousScale = 1.0;
-  int _currentFloor = 1; // initial floor
-  Offset _position = Offset.zero; // initial position
-  Offset _startPosition = Offset.zero; // start position of the drag
+  //int _currentFloor = 1; // initial floor
+  //Offset _position = Offset.zero; // initial position
+  //Offset _startPosition = Offset.zero; // start position of the drag
   Offset? _lastFocalPoint; // last recorded focal point, nullable
 
   void _showFloorSelection() {
@@ -90,13 +91,7 @@ class _MapPageState extends State<MapPage> {
                 _previousScale = 1.0;
                 _lastFocalPoint = null;
               },
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.identity()
-                  ..scale(_scale)
-                  ..translate(_position.dx, _position.dy),
-                child: Image.asset('assets/Floor $_currentFloor.png'),
-              ),
+              child: SvgPicture.asset('Assets/Floor 1.svg')
             ),
           ),
           Positioned(

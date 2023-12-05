@@ -1,7 +1,12 @@
+import 'package:flutter_application_1/enums/genders.dart';
+
 class user
 {
-  final classes = <String>[];
-  String UserName = "";
-  //String UserName = "";
-
+  final Classes = <String>[];
+  String? UserName;
+  String? Email;
+  String? PhoneNumber;
+  DateTime? BirthDate;
+  String? MainSubject;
+  genders? Gender;
 }

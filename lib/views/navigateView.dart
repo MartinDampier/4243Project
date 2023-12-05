@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NavigatePage extends StatefulWidget {
-  const NavigatePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+import '../enums/navigationTypes.dart';
 
+class NavigatePage extends StatefulWidget {
+  const NavigatePage({Key? key, required this.title, required this.navType }) : super(key: key);
+  final String title;
+  final NavigationTypes navType;
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }

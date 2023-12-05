@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_application_1/views/classesView.dart';
-
+import 'package:flutter_application_1/enums/genders.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key, required this.title}) : super(key: key);
@@ -18,12 +18,13 @@ class _AccountPageState extends State<AccountPage> {
   final TextEditingController _subjectController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? _imageFile;
+  File? userConfig;
   String _name = '';
   String _subject = '';
-  String _gender = 'Walmart Bag'; // Default gender
+  String _gender = 'Other'; // Default gender
 
   // Gender picker items
-  final List<String> _genders = ['Male', 'Female', 'Walmart Bag'];
+  final List<String> _genders = genders.values.map((x) => x.name).toList();
 
   //pick image
   Future<void> _pickImage() async {
@@ -43,7 +44,8 @@ class _AccountPageState extends State<AccountPage> {
       ),
       body: Center(
         child: ListView(
-          padding: const EdgeInsets.all(20),
+          scrollDirection: Axis.vertical,
+          padding: const EdgeInsets.all(5),
           children: <Widget>[
             if (_imageFile != null)
               Center( // Center widget can be used to prevent horizontal stretching in ListView
@@ -107,7 +109,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ..._genders.map((gender) => Align(
               alignment: Alignment.center,
               child: Container(
@@ -129,7 +131,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             )),
-            SizedBox(height: 20), // Provide some vertical spacing
+            SizedBox(height: 10), // Provide some vertical spacing
             TextButton(
               onPressed: () {
                 setState(() {
