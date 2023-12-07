@@ -10,4 +10,13 @@ class user
   DateTime? BirthDate;
   String? MainSubject;
   genders? Gender;
+
+  Map toJson() => {
+    'UserName' : UserName,
+    'Email' : Email,
+    'PhoneNumber' : PhoneNumber,
+    'BirthDate' : BirthDate!.toIso8601String(),
+    'MainSubject' : MainSubject,
+    'Gender' : Gender.toString()
+  };
 }

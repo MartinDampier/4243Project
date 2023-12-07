@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/genericStyles.dart';
+import 'package:flutter_application_1/models/user.dart';
+import 'package:flutter_application_1/models/class.dart';
 
 class ClassesPage extends StatefulWidget {
-  const ClassesPage({Key? key, required this.title}) : super(key: key);
+  ClassesPage({Key? key, required this.title, required this.myUser}) : super(key: key);
   final String title;
+  user myUser;
 
   @override
-  _ClassesPageState createState() => _ClassesPageState();
+  _ClassesPageState createState() {
+    var pageState = _ClassesPageState();
+    pageState.User = myUser;
+    pageState.SetUp();
+    return _ClassesPageState();
+  }
 }
 
 class _ClassesPageState extends State<ClassesPage> {
   List<String> inputTexts = [];
+  List<StudentClass> classes = List.empty(growable: true);
   final TextEditingController textController = TextEditingController();
+  user? User;
+
+  void SetUp(){
+    if(User != null)
+      {
+        for(var i = 0; i < User!.Classes.length; i++)
+          {
+            classes.add(User!.Classes[i]);
+          }
+      }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +62,9 @@ class _ClassesPageState extends State<ClassesPage> {
           SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: inputTexts.length,
+              itemCount: classes.length,
               itemBuilder: (context, index) {
-                final text = inputTexts[index];
+                final text = classes[index].name;
                 return Dismissible(
                   key: UniqueKey(),
                   onDismissed: (direction) {
@@ -69,7 +90,7 @@ class _ClassesPageState extends State<ClassesPage> {
                     margin: EdgeInsets.symmetric(vertical: 5.0),
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      text,
+                      text!,
                       style: TextStyle(fontSize: 16.0),
                     ),
                   ),

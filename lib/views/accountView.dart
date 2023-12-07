@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_application_1/views/classesView.dart';
 import 'package:flutter_application_1/enums/genders.dart';
 
+import '../models/user.dart';
+
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -162,7 +164,7 @@ class _AccountPageState extends State<AccountPage> {
                   onPressed: () {
                     // Use Navigator.push to navigate to the ClassesPage
                     Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return const ClassesPage(title: 'My Classes');
+                      return ClassesPage(title: 'My Classes', myUser: user(),);
                     }));
                   },
                   child: const Text('Next, put the class schedule'),

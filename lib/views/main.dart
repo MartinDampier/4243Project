@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/class.dart';
@@ -166,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 selected: false,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const ClassesPage(title: 'My Classes');
+                    return ClassesPage(title: 'My Classes', myUser: myUser!);
                   }));
                 },
               ),
